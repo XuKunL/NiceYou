@@ -74,7 +74,6 @@ public class HotCollAdaper extends RecyclerView.Adapter<HotCollAdaper.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
-
         public ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.id_num);
