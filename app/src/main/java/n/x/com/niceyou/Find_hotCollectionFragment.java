@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -20,16 +19,13 @@ public class Find_hotCollectionFragment extends Fragment {
     public Find_hotCollectionFragment() {
         super();
     }
-
-    private List<String> mDatas;
+    public List<String> mDatas= new ArrayList<String>();
     private RecyclerView recyclerView;
     private HotCollAdaper adapter;
     private void initDatas() {
-        //这里用list代替数组集合,方便添加和删除图片
-        mDatas = new ArrayList<String>();
-        for (int i = 0; i < Images.imageThumbUrls.length; i++) {
-            mDatas.add(Images.imageThumbUrls[i]);
-        }
+        JdbcReader jb = new JdbcReader();
+        jb.init();
+        jb.select(mDatas);
     }
 
     public static Find_hotCollectionFragment newInstance(String text){
