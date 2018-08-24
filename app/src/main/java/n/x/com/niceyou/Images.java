@@ -1,5 +1,8 @@
 package n.x.com.niceyou;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Images {
 
     public final static String[] imageThumbUrls = new String[] {

@@ -8,16 +8,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JdbcReader {
+public class JdbcReader{
 
-    public String driver = "com.mysql.jdbc.Driver";
-    public String url = "jdbc:mysql://qdm114539642.my3w.com:3306/qdm114539642_db";
-    public String username = "qdm114539642";
-    public String password = "rootABC123";
-    public Connection conn = null;
-    public PreparedStatement pstmt=null;
-
-
+    private static String driver = "com.mysql.jdbc.Driver";
+    private static String url = "jdbc:mysql://qdm114539642.my3w.com:3306/qdm114539642_db";
+    private static String username = "qdm114539642";
+    private static String password = "rootABC123";
+    private static Connection conn = null;
+    private static PreparedStatement pstmt=null;
+    private static List<String> mDatas= new ArrayList<String>();
+public JdbcReader(List<String> li){
+    this.mDatas=li;
+    }
 
     public void  init() {
         try {
@@ -30,28 +32,31 @@ public class JdbcReader {
         }
     }
 
-    public void select(List<String> image_list) {
+    public  List<String> select(List<String> image_list) {
         String sql = "select * from image_add";
         try {
             pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
            // System.out.println("============================");
             while (rs.next()) {
+                if(!image_list.contains(rs.getString(1)))
                 image_list.add(rs.getString(1));
                     }
           //  System.out.println("============================");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return image_list;
     }
 
-
-    public static void main(String args[]){
-        //List<String> mDatas= new ArrayList<String>();
-        JdbcReader jb = new JdbcReader();
-       // jb.init();
-       // jb.select(mDatas);
-        //System.out.println(mDatas);
+    Runnable rn=  new Runnable(){
+        public void run(){
+            init();
+            select(mDatas);
+        }
+    };
+    public void dw(){
+        new Thread(rn).start();
     }
 
 }
