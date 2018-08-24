@@ -19,13 +19,19 @@ public class Find_hotCollectionFragment extends Fragment {
     public Find_hotCollectionFragment() {
         super();
     }
-    public List<String> mDatas= new ArrayList<String>();
+    private static List<String> mDatas= new ArrayList<String>();
     private RecyclerView recyclerView;
     private HotCollAdaper adapter;
-    private void initDatas() {
-        JdbcReader jb = new JdbcReader();
-        jb.init();
-        jb.select(mDatas);
+
+    public void initdata() {
+        JdbcReader jb = new JdbcReader(mDatas);
+        jb.dw();
+    }
+
+    public void initdata1() {
+        for (int i = 0; i < Images.imageThumbUrls.length; i++) {
+            mDatas.add(Images.imageThumbUrls[i]);
+        }
     }
 
     public static Find_hotCollectionFragment newInstance(String text){
@@ -42,7 +48,10 @@ public class Find_hotCollectionFragment extends Fragment {
        // return inflater.inflate(R.layout.hotcollection, container, false);
         View view = inflater.inflate(R.layout.hotcollection, container,false);
 
-        initDatas();
+        System.out.println("----------------1--------------:"+mDatas.size());
+        initdata();
+        System.out.println("----------------2--------------:"+mDatas.size());
+
         recyclerView = (RecyclerView) view.findViewById (R.id.recyclerview);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
                StaggeredGridLayoutManager.VERTICAL));
@@ -58,17 +67,7 @@ public class Find_hotCollectionFragment extends Fragment {
             }
         });
 
-      //  final ImageView image = new ImageView(getActivity());
-        //image.setAdjustViewBounds(true);
-        //image.setScaleType(ImageView.ScaleType.CENTER);
-//        main.addView(image);
-//        image.setImageResource(images[0]);
-//        image.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                image.setImageResource(images[++currentImg%images.length]);
-//            }
-//        });
         return view;
     }
+
 }
