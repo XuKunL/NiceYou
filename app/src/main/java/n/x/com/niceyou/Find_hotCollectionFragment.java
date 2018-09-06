@@ -1,16 +1,26 @@
 package n.x.com.niceyou;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +73,60 @@ public class Find_hotCollectionFragment extends Fragment {
         adapter.setOnItemClickListener(new HotCollAdaper.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getContext(), "点击了第" + (position + 1) + "个", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "点击了第" + (position + 1) + "个", Toast.LENGTH_SHORT).show();
+              //  recyclerView.removeView(view);
+                LayoutInflater inflater_fd = LayoutInflater.from(getContext());
+                View imgEntryView = inflater_fd.inflate(R.layout.layout_fd, null);
+                final AlertDialog dialog = new AlertDialog.Builder(getContext()).create();
+                ImageView img = (ImageView) imgEntryView.findViewById(R.id.imageView_fd);
+                Glide.with(getContext()).load(mDatas.get(position)).apply(new RequestOptions().placeholder(R.drawable.a2335052).error(R.drawable.kong).centerCrop()).into(img);
+
+                dialog.setView(imgEntryView);
+                // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.show();
+//                Window window = dialog.getWindow();
+//                window.getDecorView().setPadding(0, 0, 0, 0);
+//                window.setGravity(Gravity.CENTER);
+//
+//                window.setContentView(imgEntryView);
+//                WindowManager.LayoutParams lp = window.getAttributes();
+//                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//                lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+//                window.setAttributes(lp);
+
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                builder.setTitle("请做出选择").setIcon(R.drawable.a2335052)
+//                        .setMessage("我美不美")
+//                        .setPositiveButton("美", new DialogInterface.OnClickListener() {// 积极
+//
+//                            @Override
+//                            public void onClick(DialogInterface dialog,
+//                                                int which) {
+//                                // TODO Auto-generated method stub
+//                                Toast.makeText(getContext(), "恭喜你答对了", Toast.LENGTH_SHORT)
+//                                        .show();
+//                            }
+//                        }).setNegativeButton("不美", new DialogInterface.OnClickListener() {// 消极
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog,
+//                                        int which) {
+//                        // TODO Auto-generated method stub
+//                        Toast.makeText(getContext(), "一点也不老实",  Toast.LENGTH_SHORT)
+//                                .show();
+//                    }
+//                }).setNeutralButton("不知道", new DialogInterface.OnClickListener() {// 中间级
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog,
+//                                        int which) {
+//                        // TODO Auto-generated method stub
+//                        Toast.makeText(getContext(), "快睁开眼瞅瞅",  Toast.LENGTH_SHORT)
+//                                .show();
+//                    }
+//                });
+//                builder.create().show();
+
             }
         });
 

@@ -49,9 +49,6 @@ public class HotCollAdaper extends RecyclerView.Adapter<HotCollAdaper.ViewHolder
        // imageView.getLayoutParams().height = (int) (1200 + Math.random() * 900) ;
         imageView.getLayoutParams().width = SCREE_WIDTH/2;
 
-
-
-
         ViewHolder holder = new ViewHolder(view);
         view.setOnClickListener(this);
         return holder;
