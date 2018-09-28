@@ -33,7 +33,7 @@ public JdbcReader(List<String> li){
     }
 
     public  List<String> select(List<String> image_list) {
-        String sql = "select * from image_add";
+        String sql = "select * from image_add  order by rand()";
         try {
             pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
