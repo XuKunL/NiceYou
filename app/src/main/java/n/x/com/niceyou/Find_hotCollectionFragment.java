@@ -2,6 +2,8 @@ package n.x.com.niceyou;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -79,11 +81,27 @@ public class Find_hotCollectionFragment extends Fragment {
                 View imgEntryView = inflater_fd.inflate(R.layout.layout_fd, null);
                 final AlertDialog dialog = new AlertDialog.Builder(getContext()).create();
                 ImageView img = (ImageView) imgEntryView.findViewById(R.id.imageView_fd);
-                Glide.with(getContext()).load(mDatas.get(position)).apply(new RequestOptions().placeholder(R.drawable.a2335052).error(R.drawable.kong).centerCrop()).into(img);
+                Glide.with(getContext()).load(mDatas.get(position)).apply(new RequestOptions().placeholder(R.drawable.loading).error(R.drawable.kong).fitCenter()).into(img);
 
-                dialog.setView(imgEntryView);
-                // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
+                Window window = dialog.getWindow();
+                window.setGravity(Gravity.CENTER);
+
+                //沉浸式状态栏
+                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN| View.SYSTEM_UI_FLAG_FULLSCREEN| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.TRANSPARENT);
+
+                //设置window背景，默认的背景会有Padding值，不能全屏。当然不一定要是透明，你可以设置其他背景，替换默认的背景即可。
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                window.setContentView(imgEntryView);
+                WindowManager.LayoutParams lp = window.getAttributes();
+
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+                window.getDecorView().setPadding(0, 0, 0, 0);
+                window.setAttributes(lp);
 //                Window window = dialog.getWindow();
 //                window.getDecorView().setPadding(0, 0, 0, 0);
 //                window.setGravity(Gravity.CENTER);

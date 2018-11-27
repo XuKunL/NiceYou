@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/readback"
+    android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/imageView"
+    <!-- 头部 -->
+
+    <RelativeLayout
+        android:id="@+id/chat_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/a2335052"
-        android:scaleType="fitXY"/>
-</LinearLayout>
+        android:layout_height="50dp"
+        android:background="#3A4449" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="小薇"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <!-- 底部 -->
+
+    <RelativeLayout
+        android:id="@+id/chat_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="#3A4449" >
+
+        <EditText
+            android:id="@+id/chat_input_message"
+            android:layout_width="240dp"
+            android:background="@drawable/readback"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:gravity="center" />
+
+        <Button
+            android:background="@drawable/readback"
+            android:id="@+id/chat_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/chat_input_message"
+            android:text="发送"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <!-- 中间 -->
+
+    <ListView
+        android:id="@+id/chat_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/chat_bottom"
+        android:layout_below="@id/chat_top"
+        android:divider="@null"
+        android:dividerHeight="3dp" >
+    </ListView>
+
+</RelativeLayout>

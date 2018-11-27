@@ -92,5 +92,16 @@ public class FindFragment extends Fragment {
        // tab_FindFragment_title.setSelectedTabIndicatorHeight(0);
     }
 
-
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        List<Fragment> fragments = getChildFragmentManager().getFragments();
+//        if (fragments != null) {
+//            for (Fragment fragment : fragments) {
+//                if (fragment != null) {
+//                    fragment.onRequestPermissionsResult(requestCode,permissions,grantResults);
+//                }
+//            }
+//        }
+//    }
 }
