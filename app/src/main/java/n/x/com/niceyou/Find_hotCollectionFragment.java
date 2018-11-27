@@ -81,7 +81,7 @@ public class Find_hotCollectionFragment extends Fragment {
                 View imgEntryView = inflater_fd.inflate(R.layout.layout_fd, null);
                 final AlertDialog dialog = new AlertDialog.Builder(getContext()).create();
                 ImageView img = (ImageView) imgEntryView.findViewById(R.id.imageView_fd);
-                Glide.with(getContext()).load(mDatas.get(position)).apply(new RequestOptions().placeholder(R.drawable.a2335052).error(R.drawable.kong).centerCrop()).into(img);
+                Glide.with(getContext()).load(mDatas.get(position)).apply(new RequestOptions().placeholder(R.drawable.loading).error(R.drawable.kong).fitCenter()).into(img);
 
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.show();
